@@ -16,6 +16,7 @@ const useList = () => {
             let obj = {
               Header: colObj[key].title,
               accessor: key,
+              sortable: colObj[key].sortable,
             };
 
             column.push(obj);

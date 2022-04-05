@@ -25,18 +25,24 @@ const List = () => {
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
-                  <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? " 🔽"
-                        : " 🔼"
-                      : ""}
-                  </span>
-                </th>
-              ))}
+              {headerGroup.headers.map((column) =>
+                column.sortable ? (
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render("Header")}
+                    <span>
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? " 🔽"
+                          : " 🔼"
+                        : ""}
+                    </span>
+                  </th>
+                ) : (
+                  <th {...column.getHeaderProps()}>
+                    {column.render("Header")}
+                  </th>
+                )
+              )}
             </tr>
           ))}
         </thead>
@@ -48,7 +54,7 @@ const List = () => {
                 {row.cells.map((cell) => {
                   return (
                     <td {...cell.getCellProps()}>
-                      {cell.column.id === "name" ? (
+                      {cell.column.id === "id" ? (
                         <a href={`/detail/${cell.row.original.id}`}>
                           {cell.render("Cell")}
                         </a>
