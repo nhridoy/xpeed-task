@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { useTable, useFilters } from "react-table";
 import { useSortBy } from "react-table/dist/react-table.development";
 import useList from "../../hooks/useList";
+import Filter from "../Filter/Filter";
 import "./List.css";
 
 const List = () => {
@@ -9,8 +10,17 @@ const List = () => {
 
   const COLUMNS = useMemo(() => columns, []);
   const DATA = useMemo(() => data, []);
+  const defaultColumn = useMemo(() => {
+    return {
+      Filter: Filter,
+    };
+  }, []);
 
-  const tableInstance = useTable({ columns, data }, useFilters, useSortBy);
+  const tableInstance = useTable(
+    { columns, data, defaultColumn },
+    useFilters,
+    useSortBy
+  );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;

@@ -19,7 +19,6 @@ const useList = () => {
               accessor: key,
               sortable: colObj[key].sortable,
               disableFilters: !colObj[key].searchable,
-              Filter: Filter,
             };
 
             column.push(obj);
