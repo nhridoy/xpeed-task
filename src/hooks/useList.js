@@ -1,4 +1,5 @@
 import React from "react";
+import Filter from "../components/Filter/Filter";
 
 const useList = () => {
   const [columns, setColumns] = React.useState([]);
@@ -17,6 +18,8 @@ const useList = () => {
               Header: colObj[key].title,
               accessor: key,
               sortable: colObj[key].sortable,
+              searchable: colObj[key].searchable,
+              Filter: Filter,
             };
 
             column.push(obj);

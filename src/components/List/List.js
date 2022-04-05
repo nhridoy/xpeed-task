@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useTable } from "react-table";
+import { useTable, useFilters } from "react-table";
 import { useSortBy } from "react-table/dist/react-table.development";
 import useList from "../../hooks/useList";
 import "./List.css";
@@ -10,7 +10,7 @@ const List = () => {
   const COLUMNS = useMemo(() => columns, []);
   const DATA = useMemo(() => data, []);
 
-  const tableInstance = useTable({ columns, data }, useSortBy);
+  const tableInstance = useTable({ columns, data }, useFilters, useSortBy);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;
@@ -36,10 +36,21 @@ const List = () => {
                           : " 🔼"
                         : ""}
                     </span>
+
+                    <div>
+                      {column.searchable && column.canFilter
+                        ? column.render("Filter")
+                        : null}
+                    </div>
                   </th>
                 ) : (
                   <th {...column.getHeaderProps()}>
                     {column.render("Header")}
+                    <div>
+                      {column.searchable && column.canFilter
+                        ? column.render("Filter")
+                        : null}
+                    </div>
                   </th>
                 )
               )}
