@@ -38,18 +38,14 @@ const List = () => {
                     </span>
 
                     <div>
-                      {column.searchable && column.canFilter
-                        ? column.render("Filter")
-                        : null}
+                      {column.canFilter ? column.render("Filter") : null}
                     </div>
                   </th>
                 ) : (
                   <th {...column.getHeaderProps()}>
                     {column.render("Header")}
                     <div>
-                      {column.searchable && column.canFilter
-                        ? column.render("Filter")
-                        : null}
+                      {column.canFilter ? column.render("Filter") : null}
                     </div>
                   </th>
                 )

@@ -18,7 +18,7 @@ const useList = () => {
               Header: colObj[key].title,
               accessor: key,
               sortable: colObj[key].sortable,
-              searchable: colObj[key].searchable,
+              disableFilters: !colObj[key].searchable,
               Filter: Filter,
             };
 
