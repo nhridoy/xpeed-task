@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { useTable } from "react-table";
+import { useSortBy } from "react-table/dist/react-table.development";
 import useList from "../../hooks/useList";
 import "./List.css";
 
@@ -9,7 +10,7 @@ const List = () => {
   const COLUMNS = useMemo(() => columns, []);
   const DATA = useMemo(() => data, []);
 
-  const tableInstance = useTable({ columns, data });
+  const tableInstance = useTable({ columns, data }, useSortBy);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;
@@ -25,7 +26,16 @@ const List = () => {
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render("Header")}
+                  <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}
+                  </span>
+                </th>
               ))}
             </tr>
           ))}
@@ -37,7 +47,15 @@ const List = () => {
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <td {...cell.getCellProps()}>
+                      {cell.column.id === "name" ? (
+                        <a href={`/detail/${cell.row.original.id}`}>
+                          {cell.render("Cell")}
+                        </a>
+                      ) : (
+                        cell.render("Cell")
+                      )}
+                    </td>
                   );
                 })}
               </tr>

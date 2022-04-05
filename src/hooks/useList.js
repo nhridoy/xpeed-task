@@ -10,14 +10,14 @@ const useList = () => {
       .then((response) => response.json())
       .then((json) => {
         let colObj = json.data.headers[0];
-        console.log(colObj);
+
         for (let key in colObj) {
           if (!colObj[key].hidden) {
             let obj = {
               Header: colObj[key].title,
               accessor: key,
             };
-            //   console.log(obj);
+
             column.push(obj);
           }
         }
