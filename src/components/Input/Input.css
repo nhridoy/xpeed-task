@@ -1,0 +1,9 @@
+.label {
+  display: block;
+  font-weight: bold;
+  padding: 10px;
+}
+.qfc-container input,
+select {
+  width: 100%;
+}
