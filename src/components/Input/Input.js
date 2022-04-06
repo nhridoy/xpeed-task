@@ -3,7 +3,7 @@ import "./Input.css";
 
 const Input = ({ input, label }) => {
   const [repeaterForms, setRepeaterForms] = React.useState([]);
-  console.log(input);
+  //   console.log(input);
   const { id, ...html_attr } = input?.html_attr;
 
   delete html_attr?.class;
