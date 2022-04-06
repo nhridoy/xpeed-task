@@ -59,7 +59,7 @@ const Input = ({ input, label }) => {
                 type={input?.type}
                 name={label}
                 required={input?.required}
-                defaultValue={input?.value}
+                defaultChecked={input?.default === option?.key}
                 readOnly={input?.readonly}
                 {...html_attr}
               />
