@@ -29,6 +29,6 @@ const useList = () => {
         setData(json.data.rows);
       });
   }, []);
-  return { columns, data };
+  return [columns, data, setData];
 };
 export default useList;
