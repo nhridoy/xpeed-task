@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { useTable, useFilters, useSortBy } from "react-table";
 
 import useList from "../../hooks/useList";
@@ -144,9 +145,9 @@ const List = () => {
                   return (
                     <td {...cell.getCellProps()}>
                       {cell.column.id === "id" ? (
-                        <a href={`/detail/${cell.row.original.id}`}>
+                        <Link to={`get_form/${cell.row.original.id}`}>
                           {cell.render("Cell")}
-                        </a>
+                        </Link>
                       ) : (
                         cell.render("Cell")
                       )}
