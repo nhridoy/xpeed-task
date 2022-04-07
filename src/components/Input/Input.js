@@ -21,7 +21,7 @@ const Input = ({ input, label }) => {
       patternObj == "only_letter" ||
       patternObj == "string"
     ) {
-      pattern = "^[a-zA-Z]+$";
+      pattern = "^[a-zA-Z ]+$";
     } else if (
       patternObj == "only_numbers" ||
       patternObj == "only_number" ||
@@ -34,10 +34,10 @@ const Input = ({ input, label }) => {
     ) {
       pattern = "^[a-zA-Z0-9]+$";
     } else if (patternObj == "email") {
-      pattern = "^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$";
+      pattern = "^[\\w\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     } else if (patternObj == "url") {
       pattern =
-        "[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)";
+        "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)";
     }
   }
   if (length_type?.length) {
