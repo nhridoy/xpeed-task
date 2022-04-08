@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTable, useFilters, useSortBy } from "react-table";
 
@@ -9,6 +9,7 @@ import "./List.css";
 
 const List = () => {
   const [columns, data] = useList();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const draggables = document.querySelectorAll(".draggable");
@@ -21,7 +22,11 @@ const List = () => {
 
       draggable.addEventListener("dragend", () => {
         draggable.classList.remove("dragging");
-        successMessages("http://localhost/api/reorder.php");
+        successMessages("http://localhost/api/reorder.php", setLoading).then(
+          (response) => {
+            setLoading(false);
+          }
+        );
       });
     });
 
@@ -74,67 +79,76 @@ const List = () => {
     tableInstance;
 
   return (
-    <div
-      style={{
-        padding: "20px",
-      }}
-    >
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) =>
-                column.sortable ? (
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {column.render("Header")}
-                    <span>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? " 🔽"
-                          : " 🔼"
-                        : ""}
-                    </span>
+    <>
+      <div
+        style={{
+          padding: "20px",
+        }}
+      >
+        <table {...getTableProps()}>
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) =>
+                  column.sortable ? (
+                    <th
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                    >
+                      {column.render("Header")}
+                      <span>
+                        {column.isSorted
+                          ? column.isSortedDesc
+                            ? " 🔽"
+                            : " 🔼"
+                          : ""}
+                      </span>
 
-                    <div>
-                      {column.canFilter ? column.render("Filter") : null}
-                    </div>
-                  </th>
-                ) : (
-                  <th {...column.getHeaderProps()}>
-                    {column.render("Header")}
-                    <div>
-                      {column.canFilter ? column.render("Filter") : null}
-                    </div>
-                  </th>
-                )
-              )}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()} className="droppable">
-          {rows.map((row, i) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()} draggable="true" className="draggable">
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>
-                      {cell.column.id === "id" ? (
-                        <Link to={`get_form/${cell.row.original.id}`}>
-                          {cell.render("Cell")}
-                        </Link>
-                      ) : (
-                        cell.render("Cell")
-                      )}
-                    </td>
-                  );
-                })}
+                      <div>
+                        {column.canFilter ? column.render("Filter") : null}
+                      </div>
+                    </th>
+                  ) : (
+                    <th {...column.getHeaderProps()}>
+                      {column.render("Header")}
+                      <div>
+                        {column.canFilter ? column.render("Filter") : null}
+                      </div>
+                    </th>
+                  )
+                )}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()} className="droppable">
+            {rows.map((row, i) => {
+              prepareRow(row);
+              return (
+                <tr
+                  {...row.getRowProps()}
+                  draggable="true"
+                  className="draggable"
+                >
+                  {row.cells.map((cell) => {
+                    return (
+                      <td {...cell.getCellProps()}>
+                        {cell.column.id === "id" ? (
+                          <Link to={`get_form/${cell.row.original.id}`}>
+                            {cell.render("Cell")}
+                          </Link>
+                        ) : (
+                          cell.render("Cell")
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      {loading ? <div className="lds-dual-ring"></div> : null}
+    </>
   );
 };
 

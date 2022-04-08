@@ -1,5 +1,6 @@
-const successMessages = (url) => {
-  fetch(url)
+const successMessages = (url, setLoading) => {
+  setLoading(true);
+  return fetch(url)
     .then((response) => response.json())
     .then((json) => {
       const messages = json.messages;

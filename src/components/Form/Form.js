@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Input from "../Input/Input";
 import successMessages from "../utils/successMessages";
+import "./Form.css";
 
 const Form = () => {
   const { id } = useParams();
   const [values, setValues] = useState({});
+  const [loading, setLoading] = useState(false);
   let url;
   useEffect(() => {
     setValues({});
@@ -23,7 +25,11 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    successMessages("http://localhost/api/submit_form.php");
+    successMessages("http://localhost/api/submit_form.php", setLoading).then(
+      (response) => {
+        setLoading(false);
+      }
+    );
   };
   //   console.log(values);
   return (
@@ -31,7 +37,13 @@ const Form = () => {
       {Object.keys(values).map((key, index) => (
         <Input key={index} input={values[key]} label={key} />
       ))}
-      <button type="submit">Submit</button>
+      {loading ? (
+        <button style={{ cursor: "not-allowed" }} type="submit" disabled>
+          <div className="lds-dual-rings"></div>
+        </button>
+      ) : (
+        <button type="submit">Submit</button>
+      )}
     </form>
   );
 };
