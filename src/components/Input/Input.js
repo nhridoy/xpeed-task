@@ -17,25 +17,25 @@ const Input = ({ input, label }) => {
     patternObj = pattern_type?.[0];
 
     if (
-      patternObj == "only_letters" ||
-      patternObj == "only_letter" ||
-      patternObj == "string"
+      patternObj === "only_letters" ||
+      patternObj === "only_letter" ||
+      patternObj === "string"
     ) {
       pattern = "^[a-zA-Z ]+$";
     } else if (
-      patternObj == "only_numbers" ||
-      patternObj == "only_number" ||
-      patternObj == "integer"
+      patternObj === "only_numbers" ||
+      patternObj === "only_number" ||
+      patternObj === "integer"
     ) {
       pattern = "^[0-9]+$";
     } else if (
-      patternObj == "only_letters_numbers" ||
-      patternObj == "only_letter_number"
+      patternObj === "only_letters_numbers" ||
+      patternObj === "only_letter_number"
     ) {
       pattern = "^[a-zA-Z0-9]+$";
-    } else if (patternObj == "email") {
+    } else if (patternObj === "email") {
       pattern = "^[\\w\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-    } else if (patternObj == "url") {
+    } else if (patternObj === "url") {
       pattern =
         "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)";
     }
