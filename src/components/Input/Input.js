@@ -71,6 +71,8 @@ const Input = ({ input, label }) => {
                   required={input?.repeater_fields[key]?.required}
                   defaultValue={input?.value[i]?.[key]}
                   readOnly={input?.repeater_fields[key]?.readonly}
+                  pattern={pattern}
+                  {...lengthObj}
                 />
               </div>
             );
