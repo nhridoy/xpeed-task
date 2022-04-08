@@ -1,39 +1,44 @@
-table{
-    width: 100%;
+table {
+  width: 100%;
 }
-table td, table th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  table tr:nth-child(even){background-color: #f2f2f2;}
-  
-  table tr:hover {background-color: #ddd;}
-  
-  table th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    background-color: #04AA6D;
-    color: white;
-  }
-  .draggable {
-    cursor: move;
-  }
-  .draggable.dragging {
-    opacity: .5;
-  }
-  .alert-success{
-      padding: 20px 5px;
-      border: 1px solid #04AA6D;
-      background: #04AA6D;
-      color: white;
-      margin: 5px 20px;
-  }
-  .alert-danger{
-      padding: 20px 5px;
-      border: 1px solid rgb(247, 76, 76);
-      background: rgb(247, 76, 76);
-      color: white;
-      margin: 5px 20px;
+table td,
+table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #00bcd4;
+  color: white;
+}
+.draggable {
+  cursor: move;
+}
+.draggable.dragging {
+  opacity: 0.5;
+}
+.alert-success {
+  padding: 20px 5px;
+  border: 1px solid #04aa6d;
+  background: #04aa6d;
+  color: white;
+  margin: 5px 20px;
+}
+.alert-danger {
+  padding: 20px 5px;
+  border: 1px solid rgb(247, 76, 76);
+  background: rgb(247, 76, 76);
+  color: white;
+  margin: 5px 20px;
 }
